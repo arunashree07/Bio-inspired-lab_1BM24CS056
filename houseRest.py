@@ -95,8 +95,6 @@ def run_fast_ga():
     random.seed(42)
     pop = toolbox.population(n=50)
     
-    print("\nStarting Genetic Algorithm Evolution (Optimized for Speed)...")
-    
     pop, logbook = algorithms.eaSimple(
         pop, toolbox, 
         cxpb=0.6, 
@@ -112,8 +110,7 @@ def run_fast_ga():
     print(f"\n[GA Complete] Selected {len(selected_indices)} / {num_features} Features:")
     for feat in selected_features:
         print(f"  [✓] {feat}")
-    
-    print("\nTraining final RandomForest model on GA-selected features...")
+
     final_model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
     final_model.fit(X_train[:, selected_indices], y_train)
     
